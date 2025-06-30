@@ -26,7 +26,7 @@ python manage.py createsuperuser
 
 # Inicie o servidor de desenvolvimento
 python manage.py runserver
-Acesse o painel administrativo: http://localhost:8000/admin
+Acesse o painel administrativo
 
 
 ✔️ Monitoramento estruturado das práticas de organização e disciplina
