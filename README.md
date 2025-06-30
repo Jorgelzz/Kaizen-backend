@@ -39,4 +39,3 @@ Acesse o painel administrativo: http://localhost:8000/admin
 Python 3.10+
 Virtualenv
 SQLite (ou outro banco relacional)
-Docker (opcional)
