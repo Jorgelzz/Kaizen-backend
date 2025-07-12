@@ -1,5 +1,12 @@
 from rest_framework import serializers
-from .models import Setor, Auditoria5S, ItemAuditoria, NaoConformidade, AcaoCorretiva
+from .models import Setor, Auditoria5S, ItemAuditoria, NaoConformidade, AcaoCorretiva, User
+
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
 
 class SetorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -8,6 +15,9 @@ class SetorSerializer(serializers.ModelSerializer):
 
 
 class Auditoria5SSerializer(serializers.ModelSerializer):
+    # auditor = serializers.PrimaryKeyRelatedField(
+    #     queryset = User.objects.filter('perfil_type')
+    # )
     class Meta:
         model = Auditoria5S
         fields = '__all__'

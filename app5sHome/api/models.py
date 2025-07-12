@@ -1,21 +1,45 @@
 from django.db import models
 
 
+class User(models.Model):
+
+    type_user = [
+        ('Administrador', 'Administrador'),
+        ('Supervisor', 'Supervisor'),
+        ('Líder', 'Líder'),
+        ('Auditor','Auditor')
+    ]
+
+    username_resp = models.CharField(max_length=100)
+    email = models.EmailField(max_length=255)
+    perfil_type = models.CharField(max_length=20, choices=type_user)
+    status = models.BooleanField() # Descreve se o login atual é ativo ou não
+    def __str__(self):
+        return self.username_resp
+
 class Setor(models.Model):
-    nome = models.CharField(max_length=100)
-    responsavel = models.CharField(max_length=100, blank=True, null=True)
+    setores = [
+        ('Adm','Administração'),
+        ('Produção', 'Produção'),
+        ('Manutenção', 'Manutenção'),
+        ('Ferramentaria', 'Ferramentaria'),
+    ]
+
+    setor_name = models.CharField(max_length=100, choices=setores)
+    username_resp = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.nome
+        return self.setor_name
 
 
 class Auditoria5S(models.Model):
     setor = models.ForeignKey(Setor, on_delete=models.CASCADE)
+    username_resp = models.ForeignKey(User, on_delete=models.CASCADE)
     data = models.DateField(auto_now_add=True)
-    auditor = models.CharField(max_length=100)
+    auditor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='auditorias_como_auditor')
 
     def __str__(self):
-        return f"{self.setor.nome} - {self.data}"
+        return f"{self.setor.setor_name} - {self.data}"
 
 
 class ItemAuditoria(models.Model):

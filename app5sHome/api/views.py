@@ -1,10 +1,15 @@
 from rest_framework import viewsets
-from .models import Setor, Auditoria5S, ItemAuditoria, NaoConformidade, AcaoCorretiva
+from .models import Setor, Auditoria5S, ItemAuditoria, NaoConformidade, AcaoCorretiva, User
 from .serializers import (
     SetorSerializer, Auditoria5SSerializer,
     ItemAuditoriaSerializer, NaoConformidadeSerializer,
-    AcaoCorretivaSerializer
+    AcaoCorretivaSerializer, UserSerializer
 )
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 class SetorViewSet(viewsets.ModelViewSet):
     queryset = Setor.objects.all()
