@@ -15,9 +15,12 @@ class SetorSerializer(serializers.ModelSerializer):
 
 
 class Auditoria5SSerializer(serializers.ModelSerializer):
-    # auditor = serializers.PrimaryKeyRelatedField(
-    #     queryset = User.objects.filter('perfil_type')
-    # )
+
+    qs = User.objects.filter(
+        perfil_type='Auditor'
+    )
+    print(qs)
+
     class Meta:
         model = Auditoria5S
         fields = '__all__'

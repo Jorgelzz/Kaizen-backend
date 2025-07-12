@@ -10,12 +10,13 @@ class User(models.Model):
         ('Auditor','Auditor')
     ]
 
-    username_resp = models.CharField(max_length=100)
+    responsavel = models.CharField(max_length=100)
     email = models.EmailField(max_length=255)
     perfil_type = models.CharField(max_length=20, choices=type_user)
     status = models.BooleanField() # Descreve se o login atual é ativo ou não
+
     def __str__(self):
-        return self.username_resp
+        return f"{self.responsavel} - {self.perfil_type}"
 
 class Setor(models.Model):
     setores = [
@@ -26,17 +27,16 @@ class Setor(models.Model):
     ]
 
     setor_name = models.CharField(max_length=100, choices=setores)
-    username_resp = models.ForeignKey(User, on_delete=models.CASCADE)
-
+    responsavel = models.ForeignKey(User, on_delete=models.CASCADE)
     def __str__(self):
         return self.setor_name
 
 
 class Auditoria5S(models.Model):
     setor = models.ForeignKey(Setor, on_delete=models.CASCADE)
-    username_resp = models.ForeignKey(User, on_delete=models.CASCADE)
+    responsavel = User.responsavel
     data = models.DateField(auto_now_add=True)
-    auditor = models.ForeignKey(User, on_delete=models.CASCADE, related_name='auditorias_como_auditor')
+    perfil_type = models.ForeignKey(User, on_delete=models.CASCADE, related_name='type_user')
 
     def __str__(self):
         return f"{self.setor.setor_name} - {self.data}"
