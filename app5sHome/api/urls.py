@@ -11,8 +11,6 @@ router.register(r'auditorias', Auditoria5SViewSet)
 router.register(r'itens', ItemAuditoriaViewSet)
 router.register(r'nao-conformidades', NaoConformidadeViewSet)
 router.register(r'acoes-corretivas', AcaoCorretivaViewSet)
-router.register(r'user', UserViewSet)
+router.register(r'user', UserViewSet, basename='user')
 
-urlpatterns = [
-    path('', include(router.urls)),
-]
+urlpatterns = router.urls
