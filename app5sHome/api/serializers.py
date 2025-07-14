@@ -8,6 +8,8 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
+
+
 class SetorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Setor
@@ -15,18 +17,19 @@ class SetorSerializer(serializers.ModelSerializer):
 
 
 class Auditoria5SSerializer(serializers.ModelSerializer):
-    # auditor = serializers.PrimaryKeyRelatedField(
-    #     queryset = User.objects.filter('perfil_type')
-    # )
     class Meta:
         model = Auditoria5S
         fields = '__all__'
 
 
 class ItemAuditoriaSerializer(serializers.ModelSerializer):
+    leader_name = serializers.SerializerMethodField()
     class Meta:
         model = ItemAuditoria
         fields = '__all__'
+
+    def get_leader_name(self, obj):
+        return obj.auditoria.leader.nome if obj.auditoria else None
 
 
 class NaoConformidadeSerializer(serializers.ModelSerializer):
