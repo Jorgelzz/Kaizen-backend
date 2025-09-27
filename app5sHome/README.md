@@ -24,8 +24,8 @@ python manage.py migrate
 # Crie um superusuário para acessar o admin
 python manage.py createsuperuser
 
-# Inicie o servidor de desenvolvimento
-python manage.py runserver
+# Inicie o servidor de desenvolvimento com a porta que desejar, no caso a 80 estaria sendo utilizada
+python manage.py runserver 127.0.0.1:80 
 Acesse o painel administrativo
 
 
